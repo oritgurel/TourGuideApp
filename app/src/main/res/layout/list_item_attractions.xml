@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_margin="5dp">
+
+    <ImageView
+        android:id="@+id/att_img"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:src='@drawable/resturants'
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/att_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/att_title_42sp"
+        android:textStyle="bold"
+        tools:text="@string/restaurants"
+        android:gravity="center"
+        android:background="@color/trans_black"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

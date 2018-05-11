@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="att_title_42sp">42sp</dimen>
+    <dimen name="nav_menu_title">28sp</dimen>
+    <dimen name="def_margin">16dp</dimen>
+    <dimen name="subtitle">18sp</dimen>
+    <dimen name="internal_margin">5dp</dimen>
+    <dimen name="simple_text">14sp</dimen>
+</resources>
