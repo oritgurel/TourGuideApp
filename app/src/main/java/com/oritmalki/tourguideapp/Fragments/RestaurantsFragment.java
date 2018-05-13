@@ -4,13 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.oritmalki.tourguideapp.Adapters.RestaurantAdapter;
 import com.oritmalki.tourguideapp.Model.DataGen;
@@ -44,10 +46,18 @@ public class RestaurantsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurants, container, false);
+
+        Toolbar toolbar = view.findViewById(R.id.rest_frag_toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle(getResources().getString(R.string.restaurants));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+
+
         ImageView titleImg = view.findViewById(R.id.att_img);
         titleImg.setImageResource(R.drawable.resturants);
-        TextView titleText = view.findViewById(R.id.att_name);
-        titleText.setText(R.string.restaurants);
+
         initRecyclerRestList(view);
         return view;
 
