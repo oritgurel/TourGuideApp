@@ -1,12 +1,15 @@
 package com.oritmalki.tourguideapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,9 +43,17 @@ public class RestaurantAdapter extends Adapter<RestaurantAdapter.RestHolder> {
         holder.restType.setText(resturatntList.get(position).getType());
         String website = resturatntList.get(position).getWebsite();
         holder.restWebsite.setText(website);
-        //Linkify.addLinks(holder.restWebsite, Linkify.WEB_URLS);
         holder.restPhone.setText(resturatntList.get(position).getPhone());
-        holder.restAddress.setText(resturatntList.get(position).getAddress());
+        String address = resturatntList.get(position).getAddress();
+        final String map = "http://maps.google.co.in/maps?q=" + address;
+        holder.restAddress.setText(address);
+        holder.restAddress.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                context.startActivity(mapIntent);
+            }
+        });
     }
 
     @Override

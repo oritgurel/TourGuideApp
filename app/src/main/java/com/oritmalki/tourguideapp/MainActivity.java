@@ -12,8 +12,9 @@ import android.view.MenuItem;
 
 import com.oritmalki.tourguideapp.Fragments.AttractionsFragment;
 import com.oritmalki.tourguideapp.Fragments.RestaurantsFragment;
+import com.oritmalki.tourguideapp.Model.Attraction;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AttractionsAdapterCallback {
 
     DrawerLayout mDrawer;
     android.support.v4.app.FragmentManager fm;
@@ -66,5 +67,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onAttractionSelected(Attraction attraction) {
+       switch (attraction.getName()) {
+           case "Restaurants":
+               RestaurantsFragment restaurantsFragment = new RestaurantsFragment();
+               fm.beginTransaction().replace(R.id.content_frame, restaurantsFragment).commit();
+
+               //TODO other fragments as well (sites, events)
+
+       }
     }
 }
