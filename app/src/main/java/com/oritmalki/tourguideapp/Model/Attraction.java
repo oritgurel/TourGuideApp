@@ -1,6 +1,8 @@
 package com.oritmalki.tourguideapp.Model;
 
-public class Attraction {
+import java.io.Serializable;
+
+public class Attraction implements Serializable {
 
     String name;
     String address;

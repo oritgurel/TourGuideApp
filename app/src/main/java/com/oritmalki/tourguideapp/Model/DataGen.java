@@ -26,11 +26,11 @@ public class DataGen {
         return attractionList;
     }
 
-    public static List<Resturatnt> initRestaurantListData(List<Resturatnt> resturatnts) {
+    public static List<Restaurant> initRestaurantListData(List<Restaurant> resturatnts) {
 
         resturatnts = new ArrayList<>();
 
-        Resturatnt claroRest = new Resturatnt("Claro");
+        Restaurant claroRest = new Restaurant("Claro");
         claroRest.setType("Mediterranean");
         claroRest.setAddress("Rav Aluf David Elazar St 30");
         claroRest.setPhone("+972 3-601-7777");
@@ -38,7 +38,7 @@ public class DataGen {
         claroRest.setImage(R.drawable.claro__tlv);
         resturatnts.add(claroRest);
 
-        Resturatnt hakosemRest = new Resturatnt("HaKosem");
+        Restaurant hakosemRest = new Restaurant("HaKosem");
         hakosemRest.setType("Mediterranean");
         hakosemRest.setAddress("Shlomo ha-Melekh St 1");
         hakosemRest.setPhone("+972 3-525-2033");
@@ -46,7 +46,7 @@ public class DataGen {
         hakosemRest.setImage(R.drawable.hakosem_tlv);
         resturatnts.add(hakosemRest);
 
-        Resturatnt miznonRest = new Resturatnt("Miznon");
+        Restaurant miznonRest = new Restaurant("Miznon");
         miznonRest.setType("Mediterranean");
         miznonRest.setAddress("Shlomo Ibn Gabirol St 23");
         miznonRest.setPhone("+972 3-716-8977");
@@ -54,7 +54,7 @@ public class DataGen {
         miznonRest.setImage(R.drawable.miznon__tlv);
         resturatnts.add(miznonRest);
 
-        Resturatnt onzaRest = new Resturatnt("Onza");
+        Restaurant onzaRest = new Restaurant("Onza");
         onzaRest.setType("Mediterranean");
         onzaRest.setAddress("Rabbi Hannina St. 3");
         onzaRest.setPhone("+972 3-648-6060");
@@ -63,5 +63,14 @@ public class DataGen {
         resturatnts.add(onzaRest);
 
         return resturatnts;
+    }
+
+    public static List<Site> initSiteListData(List<Site> siteList) {
+
+        siteList = new ArrayList<>();
+        //siteList.add()
+
+
+        return siteList;
     }
 }

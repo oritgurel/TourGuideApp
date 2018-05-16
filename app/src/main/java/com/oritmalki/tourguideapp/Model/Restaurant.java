@@ -1,11 +1,11 @@
 package com.oritmalki.tourguideapp.Model;
 
-public class Resturatnt extends Attraction {
+public class Restaurant extends Attraction {
 
     String type;
 
 
-    public Resturatnt(String name) {
+    public Restaurant(String name) {
         super(name);
         this.type = type;
     }

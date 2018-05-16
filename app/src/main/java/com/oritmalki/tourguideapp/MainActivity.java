@@ -11,13 +11,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.oritmalki.tourguideapp.Fragments.AttractionsFragment;
-import com.oritmalki.tourguideapp.Fragments.RestaurantsFragment;
+import com.oritmalki.tourguideapp.Fragments.PlacesFragment;
 import com.oritmalki.tourguideapp.Model.Attraction;
+import com.oritmalki.tourguideapp.Model.DataGen;
+import com.oritmalki.tourguideapp.Model.Event;
+import com.oritmalki.tourguideapp.Model.Restaurant;
+import com.oritmalki.tourguideapp.Model.Site;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AttractionsAdapterCallback {
 
     DrawerLayout mDrawer;
     android.support.v4.app.FragmentManager fm;
+
+    List<Restaurant> restaurantList;
+    List<Site> siteList;
+    List<Event> eventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
 
                         switch (item.getItemId()) {
                             case R.id.nav_restaurants:
-                                RestaurantsFragment restFragment = new RestaurantsFragment();
-                                fm.beginTransaction().replace(R.id.content_frame, restFragment).commit();
+                                PlacesFragment placesFragment = PlacesFragment.getInstance(DataGen.initRestaurantListData(restaurantList));
+                                fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
                         }
 
                         return true;
@@ -72,12 +82,19 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
 
     @Override
     public void onAttractionSelected(Attraction attraction) {
+        PlacesFragment placesFragment;
+
        switch (attraction.getName()) {
            case "Restaurants":
-               RestaurantsFragment restaurantsFragment = new RestaurantsFragment();
-               fm.beginTransaction().replace(R.id.content_frame, restaurantsFragment).commit();
+           placesFragment = PlacesFragment.getInstance(DataGen.initRestaurantListData(restaurantList));
+               fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
+               break;
 
                //TODO other fragments as well (sites, events)
+           case "Sites":
+               placesFragment = PlacesFragment.getInstance(DataGen.initSiteListData(siteList));
+               fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
+               break;
 
        }
     }
