@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +43,12 @@ public class PlacesAdapter extends Adapter<PlaceHolder> {
     public void onBindViewHolder(@NonNull PlaceHolder holder, int position) {
         holder.placeImage.setImageResource(placesList.get(position).getImage());
         holder.placeName.setText(placesList.get(position).getName());
-        String website = placesList.get(position).getWebsite();
-        holder.placeWebsite.setText(website);
-        holder.placePhone.setText(placesList.get(position).getPhone());
+        //setting a link with text "visit site"
+        makeWebLink(holder.placeWebsite, placesList.get(position).getWebsite(), "Visit Website");
+
+        //holder.placePhone.setText(placesList.get(position).getPhone());
+        makePhoneLink(holder.placePhone, placesList.get(position).getPhone(), "Call Venue");
+
         String address = placesList.get(position).getAddress();
         final String map = "http://maps.google.co.in/maps?q=" + address;
         holder.placeAddress.setText(address);
@@ -57,7 +61,9 @@ public class PlacesAdapter extends Adapter<PlaceHolder> {
         });
 
         //this parameter is relevant only to restaurants, so it is cast to Restaurant
-        holder.restType.setText(((Restaurant)placesList.get(position)).getType());
+        if (placesList.get(position) instanceof Restaurant) {
+            holder.restType.setText(((Restaurant) placesList.get(position)).getType());
+        }
 
 
     }
@@ -65,6 +71,20 @@ public class PlacesAdapter extends Adapter<PlaceHolder> {
     @Override
     public int getItemCount() {
         return placesList.size();
+    }
+
+    public void makeWebLink(TextView textView, String url, String visibleText) {
+        String text = "<a href='" + url + "'> " + visibleText + "</a>";
+        textView.setText(Html.fromHtml(text));
+        textView.setClickable(true);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public void makePhoneLink(TextView textView, String phoneNum, String visibleText) {
+        String text = "<a href='" + "tel://" + phoneNum + "'> " + visibleText + "</a>";
+        textView.setText(Html.fromHtml(text));
+        textView.setClickable(true);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public static class PlaceHolder extends ViewHolder{

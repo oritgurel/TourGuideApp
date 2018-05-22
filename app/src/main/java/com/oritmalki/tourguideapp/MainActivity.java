@@ -53,8 +53,22 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
 
                         switch (item.getItemId()) {
                             case R.id.nav_restaurants:
-                                PlacesFragment placesFragment = PlacesFragment.getInstance(DataGen.initRestaurantListData(restaurantList));
-                                fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
+                                PlacesFragment restFragment = PlacesFragment.getInstance(DataGen.initRestaurantListData(restaurantList));
+                                fm.beginTransaction().replace(R.id.content_frame, restFragment).addToBackStack(restFragment.getTag()).commit();
+                                break;
+                            case R.id.nav_sites:
+                                PlacesFragment sitesFragment = PlacesFragment.getInstance(DataGen.initSiteListData(siteList));
+                                fm.beginTransaction().replace(R.id.content_frame, sitesFragment).addToBackStack(sitesFragment.getTag()).commit();
+                                break;
+                            case R.id.nav_events:
+//                                TODO fill event list with DataGen
+//                                PlacesFragment eventsFragment = PlacesFragment.getInstance(DataGen.initSiteListData(eventList));
+//                                fm.beginTransaction().replace(R.id.content_frame, eventsFragment).addToBackStack(eventsFragment.getTag()).commit();
+                                  break;
+                            case R.id.nav_home:
+                                AttractionsFragment attractionsFragment = new AttractionsFragment();
+                                fm.beginTransaction().replace(R.id.content_frame, attractionsFragment).commit();
+
                         }
 
                         return true;
@@ -64,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
 
         AttractionsFragment attractionsFragment = new AttractionsFragment();
 
-        fm.beginTransaction().replace(R.id.content_frame, attractionsFragment).commit();
+        fm.beginTransaction().replace(R.id.content_frame, attractionsFragment).addToBackStack(attractionsFragment.getTag()).commit();
 
     }
 

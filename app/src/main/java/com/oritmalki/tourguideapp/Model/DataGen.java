@@ -7,6 +7,8 @@ import java.util.List;
 
 public class DataGen {
 
+    //TODO add text paragraph for each place which expands on item click (hiddenview + slide down transition)
+
     public static List<Attraction> initializeData(List<Attraction> attractionList) {
         //Data generation
         attractionList = new ArrayList<>();
@@ -68,8 +70,43 @@ public class DataGen {
     public static List<Site> initSiteListData(List<Site> siteList) {
 
         siteList = new ArrayList<>();
-        //siteList.add()
+        Site jaffaPort = new Site("Jaffa Port");
+        jaffaPort.setAddress("Namal Yafo");
+        jaffaPort.setImage(R.drawable.jaffa_port);
+        jaffaPort.setWebsite("https://www.namalyafo.co.il/");
+        jaffaPort.setPhone("03-6832255");
+        siteList.add(jaffaPort);
 
+        Site rotchild = new Site("Rothschild Boulevard");
+        rotchild.setAddress("sderot rothschild");
+        rotchild.setImage(R.drawable.rotschild);
+        rotchild.setWebsite("https://www.timeout.com/israel/attractions/a-stroll-down-rothschild-boulevard");
+        siteList.add(rotchild);
+
+        Site muzeumOfArt = new Site("Museum of Art");
+        muzeumOfArt.setAddress("27 Shaul HaMelech Blvd ");
+        muzeumOfArt.setWebsite("http://www.tamuseum.com/");
+        muzeumOfArt.setImage(R.drawable.museum_of_art);
+        muzeumOfArt.setPhone("03-6077020");
+        muzeumOfArt.setOpeningHours("Mon, Wed, Sat 10:00-18:00; Tue, Thu 10:00-21:00; Fri 10:00-14:00");
+        muzeumOfArt.setPrice("NIS 50 (Adult), NIS 40 (TLV Resident/Student), NIS 25 (Senior/Soldier), Free (Children under 18)");
+        siteList.add(muzeumOfArt);
+
+        Site sarona = new Site("Sarona Market");
+        sarona.setAddress("3 Aluf Kalman Magen");
+        sarona.setImage(R.drawable.sarona_market);
+        sarona.setWebsite("http://saronamarket.co.il/en");
+        sarona.setPhone("03-6242424");
+        sarona.setOpeningHours("Sun-Thu 09:00-23:00; Fri 08:00-18:00; Sat 09:00-23:00");
+        siteList.add(sarona);
+
+        Site promenade = new Site("Promenade");
+        promenade.setAddress("Tel Aviv Boardwalk Tourist Information Center, 46 Retsif Herbert Samuel St ");
+        promenade.setPhone("03-5166188");
+        promenade.setImage(R.drawable.tel_aviv_promenade_panoramics);
+        promenade.setOpeningHours("Tel Aviv Boardwalk Tourist Information Center open Daily until 17:30");
+        promenade.setWebsite("https://www.visit-tel-aviv.com/");
+        siteList.add(promenade);
 
         return siteList;
     }
