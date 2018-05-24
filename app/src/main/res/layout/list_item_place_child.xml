@@ -33,6 +33,7 @@
             android:id="@+id/opening"
             android:layout_width="wrap_content"
             android:visibility="visible"
+            android:layout_alignBaseline="@+id/open_title"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_toRightOf="@id/open_title"/>
@@ -58,6 +59,7 @@
             android:id="@+id/price_content"
             android:layout_width="wrap_content"
             android:visibility="visible"
+            android:layout_alignBaseline="@+id/price_title"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/price_title"/>

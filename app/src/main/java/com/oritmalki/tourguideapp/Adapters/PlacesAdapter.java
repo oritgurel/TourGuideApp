@@ -22,7 +22,6 @@ import com.oritmalki.tourguideapp.Adapters.PlacesAdapter.PlaceViewHolder;
 import com.oritmalki.tourguideapp.Model.Attraction;
 import com.oritmalki.tourguideapp.Model.Event;
 import com.oritmalki.tourguideapp.Model.Restaurant;
-import com.oritmalki.tourguideapp.Model.Site;
 import com.oritmalki.tourguideapp.R;
 
 import org.joda.time.DateTime;
@@ -31,6 +30,8 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 import java.util.Locale;
+
+import static android.view.View.GONE;
 
 public class PlacesAdapter extends Adapter<PlaceViewHolder> {
 
@@ -54,17 +55,24 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
     public void onBindViewHolder(@NonNull final PlaceViewHolder holder, final int position) {
 
         //bind price and opening hours in expanded
-        if (placesList.get(position) instanceof Site) {
-            if (placesList.get(position).getPrice() != null)
+            if (placesList.get(position).getPrice() != null) {
                 holder.price_title.setVisibility(View.VISIBLE);
-            holder.price.setVisibility(View.VISIBLE);
+                holder.price.setVisibility(View.VISIBLE);
+            } else {
+                holder.price_title.setVisibility(GONE);
+                holder.price.setVisibility(GONE);
+            }
             holder.price.setText(placesList.get(position).getPrice());
+
             if (placesList.get(position).getOpeningHours() != null) {
                 holder.opening_title.setVisibility(View.VISIBLE);
                 holder.openingHours.setVisibility(View.VISIBLE);
-                holder.openingHours.setText((placesList.get(position)).getOpeningHours());
+            } else {
+                holder.opening_title.setVisibility(GONE);
+                holder.openingHours.setVisibility(GONE);
             }
-        }
+            holder.openingHours.setText((placesList.get(position)).getOpeningHours());
+
         //make dates item
         if (placesList.get(position) instanceof Event) {
             final Event event = (Event) placesList.get(position);
@@ -126,7 +134,7 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
                     holder.expandableLayout.setVisibility(View.VISIBLE);
                     isExpanded = true;
                 } else {
-                    holder.expandableLayout.setVisibility(View.GONE);
+                    holder.expandableLayout.setVisibility(GONE);
                     isExpanded = false;
 
                 }
@@ -189,7 +197,7 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
 
             expandableLayout = itemView.findViewById(R.id.expanded_content);
             openingHours = itemView.findViewById(R.id.opening);
-            price = itemView.findViewById(R.id.price);
+            price = itemView.findViewById(R.id.price_content);
             opening_title = itemView.findViewById(R.id.open_title);
             price_title = itemView.findViewById(R.id.price_title);
             moreInfo = itemView.findViewById(R.id.more_expand);
