@@ -37,14 +37,10 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
     List<? extends Attraction> placesList;
     Context context;
     private boolean isExpanded;
-//    private SparseBooleanArray expandState = new SparseBooleanArray();
 
     public PlacesAdapter(List<? extends Attraction> placesList, Context context) {
         this.placesList = placesList;
         this.context = context;
-//        for (int i = 0; i < placesList.size(); i++) {
-//            expandState.append(i, false);
-//        }
     }
 
     @NonNull
@@ -71,7 +67,12 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
         }
         //make dates item
         if (placesList.get(position) instanceof Event) {
-            Event event = (Event) placesList.get(position);
+            final Event event = (Event) placesList.get(position);
+            for (int i=0; i<holder.expandableLayout.getChildCount(); i++) {
+                if (holder.expandableLayout.getChildAt(i) instanceof LinearLayout) {
+                    holder.expandableLayout.removeViewAt(i);
+                }
+            }
             for (DateTime dateTime : event.getDates()) {
                 ViewGroup dateItem = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.dates_item, holder.expandableLayout, false);
                 TextView day = dateItem.findViewById(R.id.day);
@@ -80,10 +81,17 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
                 date.setText(formatDate(dateTime));
                 TextView venue = dateItem.findViewById(R.id.venue);
                 venue.setText(event.getVenue());
+                venue.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        makeMapLink(event.getVenue());
+                    }
+                });
                 TextView time = dateItem.findViewById(R.id.time);
                 time.setText(formatTime(dateTime));
                 holder.description.setText(event.getDescription());
-//
+
                 holder.expandableLayout.addView(dateItem, 0);
             }
         }
@@ -96,35 +104,11 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
         //holder.placePhone.setText(placesList.get(position).getPhone());
         makePhoneLink(holder.placePhone, placesList.get(position).getPhone(), "Call Venue");
 
-        String address = placesList.get(position).getAddress();
-        final String map = "http://maps.google.co.in/maps?q=" + address;
-        holder.placeAddress.setText(address);
-//        holder.expandableLayout.setLayoutAnimationListener(new AnimationListener() {
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//                createRotateAnimator(holder.moreInfo, 0f, 180f).start();
-//                isExpanded = true;
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//                createRotateAnimator(holder.moreInfo, 180f, 0f).start();
-//                isExpanded = false;
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//
-//            }
-//        });
-
-
+        holder.placeAddress.setText(placesList.get(position).getAddress());
         holder.placeAddress.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
-                context.startActivity(mapIntent);
+                makeMapLink(placesList.get(position).getAddress());
             }
         });
 
@@ -132,7 +116,7 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
         if (placesList.get(position) instanceof Restaurant) {
             holder.restType.setText(((Restaurant) placesList.get(position)).getType());
         }
-        holder.moreInfo.setRotation((isExpanded) ? 180f : 0f);
+//        holder.moreInfo.setRotation((isExpanded) ? 180f : 0f);
         holder.moreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +152,12 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
         textView.setText(Html.fromHtml(text));
         textView.setClickable(true);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public void makeMapLink(String address) {
+        String map = "http://maps.google.co.in/maps?q=" + address;
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+        context.startActivity(mapIntent);
     }
 
     public static class PlaceViewHolder extends RecyclerView.ViewHolder {
@@ -218,21 +208,36 @@ public class PlacesAdapter extends Adapter<PlaceViewHolder> {
 
     public String formatDay(DateTime dateTime) {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("E");
-        String day = fmt.withLocale(Locale.ENGLISH).print(dateTime);
+        String day;
+        if (dateTime.getDayOfWeek() == 0) {
+            day = "TBA";
+        } else { day = fmt.withLocale(Locale.ENGLISH).print(dateTime);
+        }
         return day;
     }
 
     public String formatDate(DateTime dateTime) {
         DateTimeFormatter fmtMonth = DateTimeFormat.forPattern("MMM");
         DateTimeFormatter fmtDay = DateTimeFormat.forPattern("d");
-        String date = fmtMonth.withLocale(Locale.ENGLISH).print(dateTime) + " " + fmtDay.withLocale(Locale.ENGLISH).print(dateTime);
+        String date;
+        if (dateTime.getDayOfMonth() == 0) {
+            date = fmtMonth.withLocale(Locale.ENGLISH).print(dateTime);
+        } else if (dateTime.getMonthOfYear() == 0) {
+            date = "TBA";
+        } else {
+            date = fmtMonth.withLocale(Locale.ENGLISH).print(dateTime) + " " + fmtDay.withLocale(Locale.ENGLISH).print(dateTime);
+        }
         return date;
     }
 
     public String formatTime(DateTime dateTime) {
         DateTimeFormatter fmtHour = DateTimeFormat.forPattern("h:mm");
         DateTimeFormatter fmtHalf = DateTimeFormat.forPattern("a");
-        String hour = fmtHour.withLocale(Locale.ENGLISH).print(dateTime) + " " + fmtHalf.withLocale(Locale.ENGLISH).print(dateTime);
+        String hour;
+        if (dateTime.getHourOfDay() == 0) {
+            hour = "TBA";
+        } else
+        hour = fmtHour.withLocale(Locale.ENGLISH).print(dateTime) + " " + fmtHalf.withLocale(Locale.ENGLISH).print(dateTime);
         return hour;
     }
 
