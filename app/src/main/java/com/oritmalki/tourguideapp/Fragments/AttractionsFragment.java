@@ -30,7 +30,7 @@ public class AttractionsFragment extends Fragment {
         super();
     }
 
-    public AttractionsFragment getInstance() {
+    public static AttractionsFragment getInstance() {
         return new AttractionsFragment();
     }
 

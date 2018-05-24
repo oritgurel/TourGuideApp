@@ -1,29 +1,40 @@
 package com.oritmalki.tourguideapp.Model;
 
-import java.util.Date;
+import org.joda.time.DateTime;
+
+import java.util.List;
 
 public class Event extends Attraction {
 
-    Date startTime;
-    Date endTime;
+    List<DateTime> dates;
+    String type;
+    String venue;
 
     public Event(String name) {
         super(name);
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public List<DateTime> getDates() {
+        return dates;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setDates(List<DateTime> dates) {
+        this.dates = dates;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public String getType() {
+        return type;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 }
