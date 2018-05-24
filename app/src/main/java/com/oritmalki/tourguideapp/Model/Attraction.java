@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 public class Attraction implements Serializable {
 
-    String name;
-    String address;
-    String phone;
-    int image;
-    String mapLocation;
-    String website;
+    private String name;
+    private String address;
+    private String phone;
+    private int image;
+    private String mapLocation;
+    private String website;
+    private String description;
+    private String price;
+    private String openingHours;
 
     public Attraction(String name) {
         this.name = name;
@@ -61,5 +64,29 @@ public class Attraction implements Serializable {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getOpeningHours() {
+        return openingHours;
+    }
+
+    public void setOpeningHours(String openingHours) {
+        this.openingHours = openingHours;
     }
 }

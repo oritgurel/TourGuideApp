@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginVertical="5dp"
+              android:background="@color/white"
+              android:animateLayoutChanges="true"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/main_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/rest_image_item"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:foregroundGravity="left"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/resturants"/>
+
+        <TextView
+            android:id="@+id/place_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_toRightOf="@+id/rest_image_item"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_menu_title"
+            android:textStyle="bold"
+            tools:text="Mamamia"/>
+
+        <TextView
+            android:id="@+id/rest_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/place_name"
+            android:layout_marginBottom="@dimen/internal_margin"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_toRightOf="@+id/rest_image_item"
+            android:textColor="@color/primary_dark_material_dark"
+            android:textSize="@dimen/subtitle"
+            tools:text="Open: "/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/place_name"
+            android:layout_toRightOf="@id/rest_type"
+            tools:text="Price"/>
+
+        <RelativeLayout
+            android:id="@+id/details_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rest_type"
+            android:layout_marginBottom="@dimen/internal_margin"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_toRightOf="@+id/rest_image_item">
+
+            <ImageView
+                android:id="@+id/ic_item_location"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_place_black_24dp"/>
+
+            <TextView
+                android:id="@+id/item_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/ic_item_location"
+                android:layout_toRightOf="@id/ic_item_location"
+                android:autoLink="map"
+                android:textColor="@color/primary_dark_material_dark"
+                android:textSize="@dimen/simple_text"
+                tools:text="19 Eben Gabirol St."/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/details_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/details_location"
+            android:layout_marginBottom="@dimen/internal_margin"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_toRightOf="@+id/rest_image_item">
+
+            <ImageView
+                android:id="@+id/ic_item_phone"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_phone_black_24dp"/>
+
+            <TextView
+                android:id="@+id/item_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/ic_item_phone"
+                android:layout_marginVertical="5dp"
+                android:layout_toRightOf="@id/ic_item_phone"
+                android:textColor="@color/primary_dark_material_dark"
+                android:textSize="@dimen/simple_text"
+                tools:text="03-6296511"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/details_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/details_phone"
+            android:layout_marginBottom="@dimen/internal_margin"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_toRightOf="@+id/rest_image_item">
+
+            <ImageView
+                android:id="@+id/ic_item_website"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_public_black_24dp"/>
+
+            <TextView
+                android:id="@+id/item_website_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/ic_item_website"
+                android:layout_toRightOf="@id/ic_item_website"
+                android:textColor="@color/primary_dark_material_dark"
+                android:textColorLink="@color/trans_black"
+                android:textSize="@dimen/simple_text"
+                tools:text="www.mamamia.com"/>
+
+            <TextView
+                android:id="@+id/more_expand"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignBaseline="@id/item_website_url"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/ic_expand_more_black_24dp"
+                android:textColor="@color/colorPrimary"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <include
+        layout="@layout/list_item_place_child"
+        android:visibility="gone"/>
+
+</LinearLayout>

@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
                                 break;
                             case R.id.nav_events:
 //                                TODO fill event list with DataGen
-//                                PlacesFragment eventsFragment = PlacesFragment.getInstance(DataGen.initSiteListData(eventList));
-//                                fm.beginTransaction().replace(R.id.content_frame, eventsFragment).addToBackStack(eventsFragment.getTag()).commit();
+                                PlacesFragment eventsFragment = PlacesFragment.getInstance(DataGen.initEventListData(eventList));
+                                fm.beginTransaction().replace(R.id.content_frame, eventsFragment).addToBackStack(eventsFragment.getTag()).commit();
                                   break;
                             case R.id.nav_home:
                                 AttractionsFragment attractionsFragment = new AttractionsFragment();
@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
                //TODO other fragments as well (sites, events)
            case "Sites":
                placesFragment = PlacesFragment.getInstance(DataGen.initSiteListData(siteList));
+               fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
+               break;
+
+           case "Events":
+               placesFragment = PlacesFragment.getInstance(DataGen.initEventListData(eventList));
                fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
                break;
 
