@@ -1,6 +1,7 @@
 package com.oritmalki.tourguideapp.Fragments;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,11 +18,12 @@ import android.widget.ImageView;
 import com.oritmalki.tourguideapp.Adapters.PlacesAdapter;
 import com.oritmalki.tourguideapp.Model.Attraction;
 import com.oritmalki.tourguideapp.Model.Event;
+import com.oritmalki.tourguideapp.Model.Hotel;
 import com.oritmalki.tourguideapp.Model.Restaurant;
 import com.oritmalki.tourguideapp.Model.Site;
 import com.oritmalki.tourguideapp.R;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlacesFragment extends Fragment {
@@ -40,7 +42,7 @@ public class PlacesFragment extends Fragment {
     public static PlacesFragment getInstance(List<? extends Attraction> placesList) {
         PlacesFragment placesFragment = new PlacesFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(PLACES_LIST_ARGS, (Serializable) placesList);
+        bundle.putParcelableArrayList(PLACES_LIST_ARGS, (ArrayList<? extends Parcelable>) placesList);
         placesFragment.setArguments(bundle);
         return placesFragment;
     }
@@ -48,7 +50,7 @@ public class PlacesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        placeList = (List<? extends Attraction>) getArguments().getSerializable(PLACES_LIST_ARGS);
+        placeList = getArguments().getParcelableArrayList(PLACES_LIST_ARGS);
 
     }
 
@@ -78,6 +80,10 @@ public class PlacesFragment extends Fragment {
             title = getResources().getString(R.string.events);
             //get image for appbar
             titleImage = R.drawable.events;
+        }
+        else if (placeList.get(0) instanceof Hotel) {
+            title = getContext().getResources().getString(R.string.hotels);
+            titleImage = R.drawable.hotels;
         }
 
 
