@@ -23,6 +23,10 @@
          android:id="@+id/nav_sites"
          android:title="@string/sites"
          android:icon="@drawable/ic_place_black_24dp"/>
+     <item
+         android:id="@+id/nav_hotels"
+         android:title="@string/hotels"
+         android:icon="@drawable/ic_local_hotel_black_24dp"/>
 
  </group>
 </menu>

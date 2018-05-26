@@ -15,6 +15,7 @@ import com.oritmalki.tourguideapp.Fragments.PlacesFragment;
 import com.oritmalki.tourguideapp.Model.Attraction;
 import com.oritmalki.tourguideapp.Model.DataGen;
 import com.oritmalki.tourguideapp.Model.Event;
+import com.oritmalki.tourguideapp.Model.Hotel;
 import com.oritmalki.tourguideapp.Model.Restaurant;
 import com.oritmalki.tourguideapp.Model.Site;
 
@@ -28,10 +29,12 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
     List<Restaurant> restaurantList;
     List<Site> siteList;
     List<Event> eventList;
+    List<Hotel> hotelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.nav_drawer_layout);
         fm = getSupportFragmentManager();
 
@@ -68,7 +71,11 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
                             case R.id.nav_home:
                                 AttractionsFragment attractionsFragment = new AttractionsFragment();
                                 fm.beginTransaction().replace(R.id.content_frame, attractionsFragment).commit();
-
+                                break;
+                            case R.id.nav_hotels:
+                                PlacesFragment hotelsFragment = PlacesFragment.getInstance(DataGen.initHotelsListData(hotelList));
+                                fm.beginTransaction().replace(R.id.content_frame, hotelsFragment).addToBackStack(hotelsFragment.getTag()).commit();
+                                break;
                         }
 
                         return true;
@@ -101,18 +108,23 @@ public class MainActivity extends AppCompatActivity implements AttractionsAdapte
        switch (attraction.getName()) {
            case "Restaurants":
            placesFragment = PlacesFragment.getInstance(DataGen.initRestaurantListData(restaurantList));
-               fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
+               fm.beginTransaction().replace(R.id.content_frame, placesFragment).addToBackStack(placesFragment.getTag()).commit();
                break;
 
                //TODO other fragments as well (sites, events)
            case "Sites":
                placesFragment = PlacesFragment.getInstance(DataGen.initSiteListData(siteList));
-               fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
+               fm.beginTransaction().replace(R.id.content_frame, placesFragment).addToBackStack(placesFragment.getTag()).commit();
                break;
 
            case "Events":
                placesFragment = PlacesFragment.getInstance(DataGen.initEventListData(eventList));
-               fm.beginTransaction().replace(R.id.content_frame, placesFragment).commit();
+               fm.beginTransaction().replace(R.id.content_frame, placesFragment).addToBackStack(placesFragment.getTag()).commit();
+               break;
+
+           case "Hotels":
+               placesFragment = PlacesFragment.getInstance(DataGen.initHotelsListData(hotelList));
+               fm.beginTransaction().replace(R.id.content_frame, placesFragment).addToBackStack(placesFragment.getTag()).commit();
                break;
 
        }

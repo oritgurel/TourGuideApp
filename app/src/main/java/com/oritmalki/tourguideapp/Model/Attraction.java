@@ -1,8 +1,9 @@
 package com.oritmalki.tourguideapp.Model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Attraction implements Serializable {
+public class Attraction implements Parcelable {
 
     private String name;
     private String address;
@@ -17,6 +18,30 @@ public class Attraction implements Serializable {
     public Attraction(String name) {
         this.name = name;
     }
+
+    protected Attraction(Parcel in) {
+        name = in.readString();
+        address = in.readString();
+        phone = in.readString();
+        image = in.readInt();
+        mapLocation = in.readString();
+        website = in.readString();
+        description = in.readString();
+        price = in.readString();
+        openingHours = in.readString();
+    }
+
+    public static final Creator<Attraction> CREATOR = new Creator<Attraction>() {
+        @Override
+        public Attraction createFromParcel(Parcel in) {
+            return new Attraction(in);
+        }
+
+        @Override
+        public Attraction[] newArray(int size) {
+            return new Attraction[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -88,5 +113,23 @@ public class Attraction implements Serializable {
 
     public void setOpeningHours(String openingHours) {
         this.openingHours = openingHours;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(address);
+        dest.writeString(phone);
+        dest.writeInt(image);
+        dest.writeString(mapLocation);
+        dest.writeString(website);
+        dest.writeString(description);
+        dest.writeString(price);
+        dest.writeString(openingHours);
     }
 }
